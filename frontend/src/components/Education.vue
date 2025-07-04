@@ -1,10 +1,20 @@
 <script setup>
-import SectionTitle from './SectionTitle.vue';
+import { ref, onMounted } from 'vue'
+import axios from 'axios'
+onMounted(async () => {
+  try {
+    const response = await axios.get('http://localhost:3000/api/education')
+    educationHistory.value = response.data
+  } catch (error) {
+    console.error(error)
+  }
+})
+import SectionTitle from './SectionTitle.vue'
 // Data ini akan kita pindah ke backend nanti
 const educationHistory = [
- { id: 1, period: '2022 - Sekarang', institution: 'Universitas GadjahMada', major: 'S1 - Teknik Informatika' },
- { id: 2, period: '2019 - 2022', institution: 'SMA Negeri 1 TeladanYogyakarta', major: 'MIPA' }
-];
+
+  { id: 2, period: '2019 - 2022', institution: 'SMA Negeri 1 TeladanYogyakarta', major: 'MIPA' },
+]
 </script>
 <template>
   <section id="pendidikan" class="py-20 bg-white">
